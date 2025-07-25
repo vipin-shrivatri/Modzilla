@@ -14,7 +14,7 @@ android {
     compileSdk = Config.compileSdk
 
     defaultConfig {
-        applicationId = "com.azabost.modularization"
+        applicationId = "com.azabost.quest"
         minSdk = Config.minSdk
         targetSdk = Config.targetSdk
         versionCode = 1
@@ -24,14 +24,20 @@ android {
     }
 
     buildTypes {
+        debug {
+            isMinifyEnabled = false
+            buildConfigField("boolean", "IS_DEBUG_BUILD", "true")
+        }
         release {
             isMinifyEnabled = false
+            buildConfigField("boolean", "IS_DEBUG_BUILD", "false")
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = Config.javaVersion
         targetCompatibility = Config.javaVersion
@@ -76,6 +82,12 @@ dependencies {
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.kotlinxSerialization)
+    implementation(project(":posts-impl"))
+    implementation(project(":config"))
+    implementation(project(":time"))
+    implementation(project(":logging-api"))
+    implementation(project(":share"))
+    implementation(project(":logging-logcat"))
 
     testImplementation(libs.kotest.assertions.core)
     testImplementation(libs.junit)
