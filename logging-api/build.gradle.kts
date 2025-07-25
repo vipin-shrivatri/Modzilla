@@ -1,6 +1,27 @@
+import com.azabost.quest.build.Config
+
 plugins {
     alias(libs.plugins.kotlin.jvm)
+    alias(libs.plugins.ksp)
+    alias(libs.plugins.testFixtures)
 }
-dependencies{
+
+java {
+    sourceCompatibility = Config.javaVersion
+    targetCompatibility = Config.javaVersion
+}
+
+kotlin {
+    compilerOptions {
+        jvmTarget = Config.kotlinJvmTarget
+    }
+}
+
+dependencies {
     implementation(project(":analytics-api"))
+    implementation(libs.hilt.core)
+    ksp(libs.hilt.compiler)
+    implementation(libs.javax.inject)
+
+    testFixturesImplementation(libs.kotlinx.coroutines.core)
 }

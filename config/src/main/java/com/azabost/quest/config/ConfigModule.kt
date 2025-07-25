@@ -2,13 +2,21 @@ package com.azabost.quest.config
 
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Named
 
 @Module
 @InstallIn(SingletonComponent::class)
-interface ConfigModule {
+abstract class ConfigModule {
 
     @Binds
-    fun config(config: AndroidBuildConfig): Config
+    abstract fun config(config: AndroidBuildConfig): Config
+
+    companion object {
+        @Provides
+        @Named("isDebug")
+        fun provideIsDebug(): Boolean = BuildConfig.DEBUG
+    }
 }

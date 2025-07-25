@@ -82,16 +82,29 @@ dependencies {
     // Retrofit
     implementation(libs.retrofit)
     implementation(libs.retrofit.converter.kotlinxSerialization)
-    implementation(project(":posts-impl"))
-    implementation(project(":config"))
-    implementation(project(":time"))
-    implementation(project(":logging-api"))
-    implementation(project(":share"))
-    implementation(project(":logging-logcat"))
 
+    // Project dependencies
+    implementation(project(":analytics-api"))
+    implementation(project(":analytics-impl"))
+    implementation(project(":config"))
+    implementation(project(":lifecycle"))
+    implementation(project(":logging-api"))
+    implementation(project(":logging-logcat"))
+    implementation(project(":network"))
+    implementation(project(":posts-api"))
+    implementation(project(":posts-impl"))
+    implementation(project(":serialization"))
+    implementation(project(":share"))
+    implementation(project(":theme"))
+    implementation(project(":time"))
+
+    // Test dependencies
     testImplementation(libs.kotest.assertions.core)
     testImplementation(libs.junit)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(testFixtures(project(":time")))
+    testImplementation(testFixtures(project(":logging-api")))
+    testImplementation(testFixtures(project(":posts-api")))
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
